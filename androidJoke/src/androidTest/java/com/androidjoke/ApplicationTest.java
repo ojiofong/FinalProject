@@ -1,4 +1,4 @@
-package millennialmedia.androidjoke;
+package com.androidjoke;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

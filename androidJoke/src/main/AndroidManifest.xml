@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="millennialmedia.androidjoke">
+    package="com.androidjoke">
 
     <application
         android:allowBackup="true"
