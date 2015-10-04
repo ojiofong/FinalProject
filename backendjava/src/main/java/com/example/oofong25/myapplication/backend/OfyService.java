@@ -1,4 +1,4 @@
-package com.gce.backend;
+package com.example.oofong25.myapplication.backend;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
@@ -11,7 +11,8 @@ import com.googlecode.objectify.ObjectifyService;
 public class OfyService {
 
     static {
-        ObjectifyService.register(RegistrationRecord.class);
+       // ObjectifyService.register(RegistrationRecord.class);
+        ObjectifyService.register(JokeRecord.class);
     }
 
     public static Objectify ofy() {
