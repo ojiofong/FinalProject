@@ -94,12 +94,17 @@ public class MainFlavorActivity extends AppCompatActivity {
             super.onPostExecute(output);
 
             // call back for unit test
-            if (this.mCallBack!=null)
+            if (this.mCallBack != null)
                 mCallBack.onComplete(output);
 
             //start activity with joke retrieved from GCE
             Intent intent = new Intent(context, JokeActivity.class);
             intent.putExtra("joke_key", output);
+
+            // Allow AndroidTestCase to startActivity outside this context
+            if (!(context instanceof MainFlavorActivity))
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             context.startActivity(intent);
         }
 
@@ -110,7 +115,7 @@ public class MainFlavorActivity extends AppCompatActivity {
         }
 
         public interface MyAsyncTaskListener {
-             void onComplete(String retVal);
+            void onComplete(String retVal);
         }
 
 

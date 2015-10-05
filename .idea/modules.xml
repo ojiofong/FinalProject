@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FinalProject.iml" filepath="$PROJECT_DIR$/FinalProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidJoke/androidjoke.iml" filepath="$PROJECT_DIR$/androidJoke/androidjoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/backendjava/backendjava.iml" filepath="$PROJECT_DIR$/backendjava/backendjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/build-it-bigger.iml" filepath="$PROJECT_DIR$/build-it-bigger.iml" />
       <module fileurl="file://$PROJECT_DIR$/javajoke/javajoke.iml" filepath="$PROJECT_DIR$/javajoke/javajoke.iml" />
     </modules>
   </component>
