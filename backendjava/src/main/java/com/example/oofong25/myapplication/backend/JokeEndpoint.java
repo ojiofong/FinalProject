@@ -5,6 +5,8 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.config.Named;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.google.api.server.spi.response.UnauthorizedException;
+import com.google.appengine.api.users.User;
 import com.javajoke.example.Joke;
 
 import java.util.ArrayList;
@@ -44,14 +46,28 @@ public class JokeEndpoint {
         ofy().save().entity(jokeRecord).now();
     }
 
-    @ApiMethod(name = "getJokeCollection")
-    public CollectionResponse<String> getJokeCollection(@Named("keyJoke") String keyJoke) {
+    // Require authentication for getJokeCollection method only
+    //For every method that you want to authorize for, we need to add a User parameter
+    // at the end as we have done below. If the user is authorized correctly,
+    // an instance of the com.google.appengine.api.users.User  class will be passed in here.
+    @ApiMethod(
+            name = "getJokeCollectionSecure",
+            scopes = {Constants.EMAIL_SCOPE},
+            clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID},
+            audiences = {Constants.ANDROID_AUDIENCE}
+    )
+    public CollectionResponse<String> getJokeCollectionSecure(@Named("keyJoke") String keyJoke, User user) throws UnauthorizedException {
+
+        if (user == null) throw new UnauthorizedException("User is not valid. Piss off!");
+
         JokeRecord jokeRecord = ofy().load().type(JokeRecord.class).filter("keyJoke", keyJoke).first().now();
         List<String> jokes = new ArrayList<>();
         jokes.add(jokeRecord.getJoke());
         return CollectionResponse.<String>builder().setItems(jokes).build();
 
     }
+
+
 
     @ApiMethod(name = "getJoke")
     public JokeRecord getJoke(@Named("keyJoke") String keyJoke) {
