@@ -9,9 +9,14 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.javajoke.example.Joke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.example.oofong25.myapplication.backend.OfyService.ofy;
 
@@ -72,9 +77,33 @@ public class JokeEndpoint {
     @ApiMethod(name = "getJoke")
     public JokeRecord getJoke(@Named("keyJoke") String keyJoke) {
         JokeRecord jokeRecord = ofy().load().type(JokeRecord.class).filter("keyJoke", keyJoke).first().now();
+
         return jokeRecord;
 
     }
+
+
+    @ApiMethod(name = "getOkCollection")
+    public CollectionResponse<String> getOkCollection() {
+ //       JokeRecord jokeRecord = ofy().load().type(JokeRecord.class).filter("keyJoke", keyJoke).first().now();
+
+        // Testing web service call here
+
+            String s = "nothing here";
+        try {
+            s = testOkHttp();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<String> list = new ArrayList<>();
+        list.add(s);
+        return CollectionResponse.<String>builder().setItems(list).build();
+
+    }
+
+
+
 
     @ApiMethod(name = "tellAJoke")
     public JokeRecord tellAJoke() {
@@ -82,5 +111,15 @@ public class JokeEndpoint {
         jokeRecord.setJoke(new Joke().getJoke()); // Pull joke from java library
         return jokeRecord;
 
+    }
+
+    public static String testOkHttp() throws IOException {
+        String url = "http://www.pmnewsnigeria.com/feed/";
+
+        Request request = new Request.Builder().url(url).build();
+
+        OkHttpClient client = new OkHttpClient();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
     }
 }
