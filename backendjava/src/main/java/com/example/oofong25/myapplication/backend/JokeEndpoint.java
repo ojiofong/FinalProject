@@ -9,7 +9,11 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.javajoke.example.Joke;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -83,18 +87,14 @@ public class JokeEndpoint {
     }
 
 
-    @ApiMethod(name = "getOkCollection")
-    public CollectionResponse<String> getOkCollection() {
+    @ApiMethod(name = "getOkCollection2")
+    public CollectionResponse<String> getOkCollection2() {
  //       JokeRecord jokeRecord = ofy().load().type(JokeRecord.class).filter("keyJoke", keyJoke).first().now();
 
         // Testing web service call here
 
             String s = "nothing here";
-        try {
-            s = testOkHttp();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            s = testOkHttp2();
 
         List<String> list = new ArrayList<>();
         list.add(s);
@@ -121,5 +121,28 @@ public class JokeEndpoint {
         OkHttpClient client = new OkHttpClient();
         Response response = client.newCall(request).execute();
         return response.body().string();
+    }
+
+    public static String testOkHttp2()  {
+        // https://cloud.google.com/appengine/docs/java/urlfetch/#Java_Making_requests
+
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            URL url = new URL("http://www.pmnewsnigeria.com/feed/");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            reader.close();
+
+        } catch (MalformedURLException e) {
+            // ...
+        } catch (IOException e) {
+            // ...
+        }
+        return sb.toString();
     }
 }
