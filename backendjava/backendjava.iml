@@ -48,5 +48,6 @@
     <orderEntry type="library" exported="" name="appengine-api-1.0-sdk-1.9.18" level="project" />
     <orderEntry type="library" exported="" name="guava-14.0.1" level="project" />
     <orderEntry type="library" exported="" name="appengine-api-labs-1.7.6" level="project" />
+    <orderEntry type="library" exported="" name="backendjava.backendjava-android-endpoints" level="project" />
   </component>
 </module>

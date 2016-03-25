@@ -1,7 +1,7 @@
-# Gradle for Android and Java Final Project
+# Gradle for Android and Java Project
 
-In this project, you will create an app with multiple flavors that uses
-multiple libraries and Google Could Endpoints. The finished app will consist
+This project contains an app with multiple flavors that uses
+multiple libraries and Google Could Endpoints. The app consists
 of four modules. A Java library that provides jokes, a Google Could Endpoints
 (GCE) project that serves those jokes, an Android Library containing an
 activity for displaying jokes, and an Android app that fetches jokes from the
@@ -25,7 +25,7 @@ You will learn the role of Gradle in building Android Apps and how to use Gradle
 * Use the Gradle App Engine plugin to deploy a backend
 * Configure an integration test suite that runs against the local App Engine development server
 
-##How Do I Complete this Project?
+##Steps to Complete this Project?
 
 ### Step 0: Starting Point
 

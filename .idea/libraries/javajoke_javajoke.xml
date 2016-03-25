@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javajoke.javajoke">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/javajoke/build/libs/javajoke.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
